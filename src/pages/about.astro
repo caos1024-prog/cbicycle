@@ -1,0 +1,45 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About · ${SITE_TITLE}`} description="About CBicycle. · 关于 CBicycle。" />
+	</head>
+	<body>
+		<Header />
+		<main class="prose-wrap">
+			<div class="post-head">
+				<h1>About 关于</h1>
+			</div>
+			<div class="prose">
+				<p>
+					CBicycle is a small personal site about cycling — the rides, the notes scribbled
+					afterwards, and the tools that make the next ride a little better.
+				</p>
+				<p>
+					CBicycle 是一个关于骑行的小小个人站点 —— 记录骑过的路线、事后随手写下的笔记,以及那些让下一次骑行更好的小工具。
+				</p>
+				<p>
+					It runs on <a href="https://astro.build/">Astro</a> and
+					<a href="https://pages.cloudflare.com/">Cloudflare Pages</a>, and it's quietly a work in
+					progress. 本站用 Astro + Cloudflare Pages 搭建,还在慢慢长大。
+				</p>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.post-head h1 {
+		margin: 0;
+	}
+	.prose :global(p) {
+		margin-bottom: 1.2em;
+	}
+</style>

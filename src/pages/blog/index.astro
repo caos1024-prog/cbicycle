@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Blog · ${SITE_TITLE}`}
+			description="Rides, notes, and tools. · 关于骑行、笔记与工具的记录。"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="prose-wrap">
+			<h1>Blog 博客</h1>
+			<p class="sub">Rides, notes, tools. · 骑行、笔记、工具。</p>
+			{
+				posts.length === 0 ? (
+					<p class="sub">还没有文章 · No posts yet.</p>
+				) : (
+					<ul class="post-list">
+						{posts.map((post) => (
+							<li>
+								<a href={`/blog/${post.id}/`}>
+									<span class="row">
+										<span class="lang-badge">{post.data.lang === 'zh' ? '中' : 'EN'}</span>
+										<FormattedDate date={post.data.pubDate} />
+									</span>
+									<span class="title">{post.data.title}</span>
+									{post.data.description && <span class="desc">{post.data.description}</span>}
+								</a>
+							</li>
+						))}
+					</ul>
+				)
+			}
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.sub {
+		color: var(--muted);
+		margin-top: -0.4em;
+	}
+</style>

@@ -1,0 +1,47 @@
+# Pages CMS 配置 —— 可选的「网页版编辑器」(见 README 的「阶段 4」)。
+# 连接后即可在浏览器里写文章,无需碰代码:https://app.pagescms.org
+# 注:这个文件 Astro 构建时会忽略,只有 Pages CMS 读取。接入时我们再一起核对字段。
+
+media:
+  - name: images
+    label: 图片 Images
+    path: public/uploads
+    output: /uploads
+
+content:
+  - name: posts
+    label: 博客文章 Posts
+    type: collection
+    path: src/content/blog
+    filename: '{fields.title | slugify}.md'
+    view:
+      fields: [title, lang, pubDate]
+      sort: [pubDate, title]
+      default:
+        sort: pubDate
+        order: desc
+    fields:
+      - name: title
+        label: 标题 Title
+        type: string
+      - name: description
+        label: 摘要 Description
+        type: text
+      - name: pubDate
+        label: 日期 Date
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: lang
+        label: 语言 Language
+        type: select
+        options:
+          values: [zh, en]
+        default: zh
+      - name: draft
+        label: 草稿 Draft（勾选则不公开）
+        type: boolean
+        default: false
+      - name: body
+        label: 正文 Body
+        type: rich-text

@@ -1,0 +1,28 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+	<div class="footer-inner">
+		<span>© {year} CBicycle</span>
+		<span class="right">Built on Cloudflare Pages · Tokyo time, slow mornings</span>
+	</div>
+</footer>
+
+<style>
+	footer {
+		border-top: 1px solid var(--line);
+		margin-top: 72px;
+	}
+	.footer-inner {
+		width: min(var(--wide-width), calc(100% - 40px));
+		margin: 0 auto;
+		padding: 26px 0 44px;
+		display: flex;
+		justify-content: space-between;
+		gap: 12px;
+		flex-wrap: wrap;
+		color: var(--faint);
+		font-size: 0.82rem;
+	}
+</style>
